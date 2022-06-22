@@ -12,12 +12,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Produit")
+@CrossOrigin
 public class ProduitController {
     @Autowired
     ProduitIService produitIService;
     @ResponseBody
     @GetMapping("/AfficherProduit")
-    @RolesAllowed("user")
+    @RolesAllowed("admin")
+    //http://localhost:8082/Produit/AfficherProduit
+
     public List<Produit> getProduitList() {
         List<Produit> listProduits = produitIService.retrieveAllProduit();
         return listProduits;
@@ -25,6 +28,7 @@ public class ProduitController {
     @PostMapping("/add")
     @ResponseBody
     @RolesAllowed("admin")
+    //http://localhost:8082/Produit/add
 
     public Produit addProduit(@RequestBody Produit p)
     {
@@ -35,6 +39,7 @@ public class ProduitController {
     @DeleteMapping("/deleteProd/{Prod-id}")
     @ResponseBody
     @RolesAllowed("admin")
+    //http://localhost:8082/Produit/deleteProd/{Prod-id}
 
     public void deleteProduit(@PathVariable("Prod-id") int id) {
         produitIService.deleteProduit(id);
@@ -43,6 +48,8 @@ public class ProduitController {
     @PutMapping("/updateProd")
     @ResponseBody
     @RolesAllowed("admin")
+    //http://localhost:8082/Produit/updateProd
+
     public Produit updateProduit(@RequestBody Produit p ) {
         return produitIService.updateProduit(p);
     }

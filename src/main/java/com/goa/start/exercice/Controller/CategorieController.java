@@ -11,12 +11,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping ("/Categorie")
+@CrossOrigin
 public class CategorieController {
     @Autowired
     CatégorieIService catégorieIService;
     @ResponseBody
     @GetMapping ("/AfficherCatégories")
     @RolesAllowed("user")
+    //http://localhost:8082/Catégorie/AfficherCatégories
     public List<Categories> getCategoriesList() {
         List<Categories> listCategories = catégorieIService.retrieveAllCategories();
         return listCategories;
@@ -24,6 +26,8 @@ public class CategorieController {
     @PostMapping ("/add")
     @ResponseBody
     @RolesAllowed("admin")
+    //http://localhost:8082/Catégorie/add
+
     public Categories addCategories(@RequestBody Categories C)
     {
         Categories Cat= catégorieIService.addCategories(C);
@@ -32,6 +36,8 @@ public class CategorieController {
     @DeleteMapping("/deleteCat/{Catégorie-id}")
     @ResponseBody
     @RolesAllowed("admin")
+    //http://localhost:8082/Catégorie/deleteCat/{Catégorie-id}
+
     public void deleteCategories(@PathVariable("Catégorie-id") int id) {
         catégorieIService.deleteCategories(id);
     }
@@ -39,7 +45,7 @@ public class CategorieController {
     @PutMapping("/updateCat")
     @ResponseBody
     @RolesAllowed("admin")
-
+    //http://localhost:8082/Catégorie/updateCat}
     public Categories updateCategories(@RequestBody Categories C) {
         return catégorieIService.updateCategories(C);
     }
